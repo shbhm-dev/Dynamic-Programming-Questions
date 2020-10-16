@@ -1,3 +1,2 @@
-2
-abbc
-abcabc
+1
+5 2
