@@ -1,4 +1,4 @@
-// QUE27.cpp
+// QUE28.cpp
 
 #include <iostream>
 #include <vector>
@@ -20,22 +20,32 @@
 using namespace std;
 #define fastIO ios_base::sync_with_stdio(false); cin.tie(NULL);
 #define ll long long int
-void noofsol(int arr[], int n, int rhs)
+void solve()
 {
+	int n;
+	cin >> n;
+	string s;
+	cin >> s;
 
-	int dp[10000] = {0};
-	dp[0] = 1;
-	for (int i = 0; i < n ; i++)
+	string t = s;
+	int dp[n + 1][n + 1];
+	memset(dp, 0, sizeof dp);
+
+	for (int i = 1 ; i <= n ; i ++)
 	{
-		for (int j = arr[i] ; j <= rhs ; j++)
+		for (int j = 1 ; j <= n ; j++)
 		{
-			dp[j] += dp[j - arr[i]];
+
+			if (s[i - 1] == t[j - 1] && i != j)
+			{
+				dp[i][j] = 1 + dp[i - 1][j - 1];
+			} else
+				dp[i][j] = max(dp[i - 1][j] , dp[i][j - 1]);
+
 		}
-
-
 	}
+	cout << dp[n][n] << endl;
 
-	cout << dp[rhs] << endl;
 }
 int main() {
 	fastIO
@@ -47,15 +57,7 @@ int main() {
 	cin >> t;
 	while (t--)
 	{
-		int n;
-		cin >> n;
-		int arr[n];
-		for (int i = 0 ; i < n ; i ++)
-			cin >> arr[i];
-
-		int rhs;
-		cin >> rhs;
-		noofsol(arr, n, rhs);
+		solve();
 	}
 
 	return 0;
